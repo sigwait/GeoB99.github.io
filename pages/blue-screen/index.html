@@ -1,7 +1,7 @@
 <!doctype html><html>
 <head>
 <meta charset=utf-8>
-<meta charset=utf-8>
+<link rel=stylesheet href=css/style.css>
 <link rel=icon href=/images/Homepage-pic.png>
 <title>Understanding Blue Screens of Death (Part 1)</title>
 </head>
@@ -10,6 +10,21 @@
 <h2>ReactOS Tutorials</h2>
 <h1>Understanding Blue Screens of Death (Part 1)</h2>
 <h4><a href=/ros-tutorials/>&lt;&lt; Go Back</a></h4>
+<h2>Table of contents</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#introduction>Introduction</a></li>
+<li><a href=#why-does-reactoswindows-have-to-crash>Why does ReactOS/Windows have to crash?</a></li>
+<li><a href=#the-anatomy-of-a-bsod>The anatomy of a BSoD</a></li>
+<li><a href=#the-internal-mechanism-of-a-bsod>The internal mechanism of a BSoD</a></li>
+<li><a href=#is-the-crash-caused-by-a-hardware-malfunction>Is the crash caused by a hardware malfunction?</a></li>
+<li><a href=#differences-between-windows-9x-and-nt-blue-screen-internal-mechanism>Differences between Windows 9x and NT blue screen internal mechanism</a>
+<ul>
+<li><a href=#references>References</a></li>
+</ul>
+</li>
+</ul>
+</nav>
 <h2 id=introduction>Introduction</h2>
 <p>Ahh, those blue screens. Everybody hates them and so do you. Especially when you&rsquo;re in the middle of something, like doing important work and out of a sudden a BSoD pops up leaving all of your unsaved work lost forever. It&rsquo;s so frustrating, isn&rsquo;t it? Despite this, Windows (and ReactOS as well) have multitude of reasons why the system has to be brought to a crash and in this article I&rsquo;ll cover the general tenets and aspects of the blue screen. In the Part II of the article I&rsquo;ll be covering how to actually troubleshoot a BSoD using WinDBG and understanding crash dumps.</p>
 <h2 id=why-does-reactoswindows-have-to-crash>Why does ReactOS/Windows have to crash?</h2>
