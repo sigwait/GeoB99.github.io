@@ -22,89 +22,91 @@
 <h1>Winsrv layout tree</h2>
 <h4><a href=https://sigwait.github.io/GeoB99.github.io/ros-tutorials/>&lt;&lt; Go Back</a></h4>
 <hr>
-&lt;h2 id="windows-user--console-server-library-layout-tree">Windows USER + Console server library layout tree&lt;/h2>
-&lt;p>Nothing much has to be said about this library. &lt;strong>Winsrv.dll&lt;/strong> is all but a provider for server intercommunication support for console and window manager environment. That is, the server being the kernel mode realm of the Windows subsystem environment (as usual &lt;strong>Winsrv.dll&lt;/strong> relies on Win32k). Speaking of the window manager environment, some fundamental aspects of &lt;strong>Winsrv.dll&lt;/strong> are the hard-error implementation, shutdown/logout notification mechanism and windowing message communication.&lt;/p>
-&lt;ul class="tree">
-&lt;li>d:
-&lt;ul>
-&lt;li>nt
-&lt;ul>
-&lt;li>windows (Windows Subsystem)
-&lt;ul>
-&lt;li>core (Core Windows Kernel Subsystem)
-&lt;ul>
-&lt;li>ntcon (Native Console)
-&lt;ul>
-&lt;li>server
-&lt;ul>
-&lt;li>_output.h&lt;/li>
-&lt;li>_stream.h&lt;/li>
-&lt;li>bitmap.c&lt;/li>
-&lt;li>clipbrd.c&lt;/li>
-&lt;li>cmdline.c&lt;/li>
-&lt;li>convarea.c&lt;/li>
-&lt;li>cursor.c&lt;/li>
-&lt;li>dbcs.c&lt;/li>
-&lt;li>directio.c&lt;/li>
-&lt;li>find.c&lt;/li>
-&lt;li>foncache.c&lt;/li>
-&lt;li>hard.c&lt;/li>
-&lt;li>input.c&lt;/li>
-&lt;li>link.c&lt;/li>
-&lt;li>menu.c&lt;/li>
-&lt;li>misc.c&lt;/li>
-&lt;li>output.c&lt;/li>
-&lt;li>private.c&lt;/li>
-&lt;li>resize.c&lt;/li>
-&lt;li>share.c&lt;/li>
-&lt;li>srvinit.c&lt;/li>
-&lt;li>srvvdm.c&lt;/li>
-&lt;li>stream.c&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;pre>&lt;code> &amp;lt;!-- Native USER Window Manager --&amp;gt;
-&amp;lt;li&amp;gt;ntuser (Native USER Window Manager)
-&amp;lt;ul&amp;gt;
-&amp;lt;li&amp;gt;server
-&amp;lt;ul&amp;gt;
-&amp;lt;li&amp;gt;api.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;command.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;debug.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;exitwin.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;harderr.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;icamsg.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;instdev.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;reclient.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;sendmsg.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;server.c&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-&amp;lt;/li&amp;gt;
-&amp;lt;!-- Win32k Run-Time Library --&amp;gt;
-&amp;lt;li&amp;gt;rtl (Win32k Run-Time Library)
-&amp;lt;ul&amp;gt;
-&amp;lt;li&amp;gt;heap.c&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-&amp;lt;/li&amp;gt;
-&amp;lt;!-- Terminal Spool --&amp;gt;
-&amp;lt;li&amp;gt;termspl (Terminal Spool)
-&amp;lt;ul&amp;gt;
-&amp;lt;li&amp;gt;kmspool.c&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;splkernl.c&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;&lt;/code>&lt;/pre>
+<h2 id=windows-user--console-server-library-layout-tree>Windows USER + Console server library layout tree</h2>
+<p>Nothing much has to be said about this library. <strong>Winsrv.dll</strong> is all but a provider for server intercommunication support for console and window manager environment. That is, the server being the kernel mode realm of the Windows subsystem environment (as usual <strong>Winsrv.dll</strong> relies on Win32k). Speaking of the window manager environment, some fundamental aspects of <strong>Winsrv.dll</strong> are the hard-error implementation, shutdown/logout notification mechanism and windowing message communication.</p>
+<ul class=tree>
+<li>d:
+<ul>
+<li>nt
+<ul>
+<li>windows (Windows Subsystem)
+<ul>
+<li>core (Core Windows Kernel Subsystem)
+<ul>
+<li>ntcon (Native Console)
+<ul>
+<li>server
+<ul>
+<li>_output.h</li>
+<li>_stream.h</li>
+<li>bitmap.c</li>
+<li>clipbrd.c</li>
+<li>cmdline.c</li>
+<li>convarea.c</li>
+<li>cursor.c</li>
+<li>dbcs.c</li>
+<li>directio.c</li>
+<li>find.c</li>
+<li>foncache.c</li>
+<li>hard.c</li>
+<li>input.c</li>
+<li>link.c</li>
+<li>menu.c</li>
+<li>misc.c</li>
+<li>output.c</li>
+<li>private.c</li>
+<li>resize.c</li>
+<li>share.c</li>
+<li>srvinit.c</li>
+<li>srvvdm.c</li>
+<li>stream.c</li>
+</ul>
+</li>
+</ul>
+</li>
+<pre><code>                             &lt;!-- Native USER Window Manager --&gt;
+                             &lt;li&gt;ntuser (Native USER Window Manager)
+                                &lt;ul&gt;
+                                   &lt;li&gt;server
+                                      &lt;ul&gt;
+                                         &lt;li&gt;api.c&lt;/li&gt;
+                                         &lt;li&gt;command.c&lt;/li&gt;
+                                         &lt;li&gt;debug.c&lt;/li&gt;
+                                         &lt;li&gt;exitwin.c&lt;/li&gt;
+                                         &lt;li&gt;harderr.c&lt;/li&gt;
+                                         &lt;li&gt;icamsg.c&lt;/li&gt;
+                                         &lt;li&gt;instdev.c&lt;/li&gt;
+                                         &lt;li&gt;reclient.c&lt;/li&gt;
+                                         &lt;li&gt;sendmsg.c&lt;/li&gt;
+                                         &lt;li&gt;server.c&lt;/li&gt;
+                                      &lt;/ul&gt;
+                                   &lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;!-- Win32k Run-Time Library --&gt;
+                             &lt;li&gt;rtl (Win32k Run-Time Library)
+                                &lt;ul&gt;
+                                   &lt;li&gt;heap.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;!-- Terminal Spool --&gt;
+                             &lt;li&gt;termspl (Terminal Spool)
+                                &lt;ul&gt;
+                                   &lt;li&gt;kmspool.c&lt;/li&gt;
+                                   &lt;li&gt;splkernl.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+                    &lt;/ul&gt;
+                 &lt;/li&gt;
+              &lt;/ul&gt;
+           &lt;/li&gt;
+        &lt;/ul&gt;
+     &lt;/li&gt;
+  &lt;/ul&gt;</code></pre>
 </div>
 <footer>
 <p>© GeoB99's Homepage, 2020-2022 | HTML 5 and <a href=https://gohugo.io>Gohugo</a> powered | <a href=https://github.com/GeoB99>GitHub</a></p>

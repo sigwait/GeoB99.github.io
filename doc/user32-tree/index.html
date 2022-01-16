@@ -24,139 +24,134 @@ d:  nt  windows (Windows Subsystem)  core (Core Windows Kernel Subsystem)  ntuse
 <h1>User32 Tree</h2>
 <h4><a href=https://sigwait.github.io/GeoB99.github.io/ros-tutorials/>&lt;&lt; Go Back</a></h4>
 <hr>
-&lt;h2 id="user32-user-mode-library-layout-tree">User32 user-mode library layout tree&lt;/h2>
-&lt;p>&lt;strong>User32.dll&lt;/strong> is a user mode DLL library that provides windowing manager APIs to the client. An example of a call brought by the said library is &lt;code>CreateWindowExW&lt;/code> which creates a window with extended styles. The documented function calls in the &lt;strong>User32.dll&lt;/strong> library rely on undocumented internal functions in Win32k, the kernel mode side of the Windows subsystem.&lt;/p>
-&lt;ul class = "tree">
-&lt;li>d:
-&lt;ul>
-&lt;li>nt
-&lt;ul>
-&lt;li>windows (Windows Subsystem)
-&lt;ul>
-&lt;li>core (Core Windows Kernel Subsystem)
-&lt;ul>
-&lt;!-- Native USER Window Manager -->
-&lt;li>ntuser (Native USER Window Manager)
-&lt;ul>
-&lt;!-- USER user-mode library -->
-&lt;li>client (USER user-mode library)
-&lt;ul>
-&lt;li>acons.c&lt;/li>
-&lt;li>btnctl.c&lt;/li>
-&lt;li>callback.c&lt;/li>
-&lt;li>classc.c&lt;/li>
-&lt;li>cldib.c&lt;/li>
-&lt;li>clenum.c&lt;/li>
-&lt;li>clhook.c&lt;/li>
-&lt;li>client.c&lt;/li>
-&lt;li>clinit.c&lt;/li>
-&lt;li>clmenu.c&lt;/li>
-&lt;li>clmsg.c&lt;/li>
-&lt;li>clrect.c&lt;/li>
-&lt;li>clres.c&lt;/li>
-&lt;li>cltxt.h&lt;/li>
-&lt;li>combodir.c&lt;/li>
-&lt;li>comboini.c&lt;/li>
-&lt;li>connect.c&lt;/li>
-&lt;li>csrstubs.c&lt;/li>
-&lt;li>ddemlcli.c&lt;/li>
-&lt;li>ddemlwp.c&lt;/li>
-&lt;li>ddetrack.c&lt;/li>
-&lt;li>dlgbegin.c&lt;/li>
-&lt;li>dlgend.c&lt;/li>
-&lt;li>dlgmgr.c&lt;/li>
-&lt;li>dlgmgr2.c&lt;/li>
-&lt;li>dlgmgrc.c&lt;/li>
-&lt;li>dmmnem.c&lt;/li>
-&lt;li>draw.c&lt;/li>
-&lt;li>drawtext.c&lt;/li>
-&lt;li>edecrare.c&lt;/li>
-&lt;li>editec.c&lt;/li>
-&lt;li>editml.c&lt;/li>
-&lt;li>editsl.c&lt;/li>
-&lt;li>edmlrare.c&lt;/li>
-&lt;li>fareast.c&lt;/li>
-&lt;li>fntsweep.c&lt;/li>
-&lt;li>getsetc.c&lt;/li>
-&lt;li>handles.c&lt;/li>
-&lt;li>hdata.c&lt;/li>
-&lt;li>help.c&lt;/li>
-&lt;li>hsz.c&lt;/li>
-&lt;li>imectl.c&lt;/li>
-&lt;li>immhotky.c&lt;/li>
-&lt;li>instance.c&lt;/li>
-&lt;li>lb1.c&lt;/li>
-&lt;li>lboxctl1.c&lt;/li>
-&lt;li>lboxctl2.c&lt;/li>
-&lt;li>lboxctl3.c&lt;/li>
-&lt;li>lboxrare.c&lt;/li>
-&lt;li>mdimenu.c&lt;/li>
-&lt;li>mdiwin.c&lt;/li>
-&lt;li>menuc.c&lt;/li>
-&lt;li>menuddc.c&lt;/li>
-&lt;li>mmcl.c&lt;/li>
-&lt;li>mngrayc.c&lt;/li>
-&lt;li>monitor.c&lt;/li>
-&lt;li>msgbox.c&lt;/li>
-&lt;li>ntcftxt.h&lt;/li>
-&lt;li>ntstubs.c&lt;/li>
-&lt;li>oemxlate.c&lt;/li>
-&lt;li>queuec.c&lt;/li>
-&lt;li>random.c&lt;/li>
-&lt;li>reader.c&lt;/li>
-&lt;li>register.c&lt;/li>
-&lt;li>rtlinit.c&lt;/li>
-&lt;li>rtlres.c&lt;/li>
-&lt;li>sbapi.c&lt;/li>
-&lt;li>statctl.c&lt;/li>
-&lt;li>stdptcl.c&lt;/li>
-&lt;li>strings.c&lt;/li>
-&lt;li>usercli.h&lt;/li>
-&lt;li>winable.c&lt;/li>
-&lt;li>winmgrc.c&lt;/li>
-&lt;li>wsprintf.c&lt;/li>
-&lt;li>wstrings.c&lt;/li>
-&lt;li>xact.c&lt;/li>
-&lt;li>combo.c&lt;/li>
-&lt;li>wow.c&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;!-- Header files -->
-&lt;li>inc (Header Files)
-&lt;ul>
-&lt;li>ntcb.h&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;!-- User32 Run-Time Library -->
-&lt;li>rtl (User32 Run-Time library)
-&lt;ul>
-&lt;li>chartran.c&lt;/li>
-&lt;li>draw.c&lt;/li>
-&lt;li>drawtext.c&lt;/li>
-&lt;li>menu.c&lt;/li>
-&lt;li>mmrtl.c&lt;/li>
-&lt;li>winmgr.c&lt;/li>
-&lt;li>wow.c&lt;/li>
-&lt;li>winevent.c&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;!-- Win32k Run-Time Library -->
-&lt;li>rtl (Win32k Run-Time Library)
-&lt;ul>
-&lt;li>debug.c&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
+<h2 id=user32-user-mode-library-layout-tree>User32 user-mode library layout tree</h2>
+<p><strong>User32.dll</strong> is a user mode DLL library that provides windowing manager APIs to the client. An example of a call brought by the said library is <code>CreateWindowExW</code> which creates a window with extended styles. The documented function calls in the <strong>User32.dll</strong> library rely on undocumented internal functions in Win32k, the kernel mode side of the Windows subsystem.</p>
+<ul class=tree>
+<li>d:
+<ul>
+<li>nt
+<ul>
+<li>windows (Windows Subsystem)
+<ul>
+<li>core (Core Windows Kernel Subsystem)
+<ul>
+<li>ntuser (Native USER Window Manager)
+<ul>
+<li>client (USER user-mode library)
+<ul>
+<li>acons.c</li>
+<li>btnctl.c</li>
+<li>callback.c</li>
+<li>classc.c</li>
+<li>cldib.c</li>
+<li>clenum.c</li>
+<li>clhook.c</li>
+<li>client.c</li>
+<li>clinit.c</li>
+<li>clmenu.c</li>
+<li>clmsg.c</li>
+<li>clrect.c</li>
+<li>clres.c</li>
+<li>cltxt.h</li>
+<li>combodir.c</li>
+<li>comboini.c</li>
+<li>connect.c</li>
+<li>csrstubs.c</li>
+<li>ddemlcli.c</li>
+<li>ddemlwp.c</li>
+<li>ddetrack.c</li>
+<li>dlgbegin.c</li>
+<li>dlgend.c</li>
+<li>dlgmgr.c</li>
+<li>dlgmgr2.c</li>
+<li>dlgmgrc.c</li>
+<li>dmmnem.c</li>
+<li>draw.c</li>
+<li>drawtext.c</li>
+<li>edecrare.c</li>
+<li>editec.c</li>
+<li>editml.c</li>
+<li>editsl.c</li>
+<li>edmlrare.c</li>
+<li>fareast.c</li>
+<li>fntsweep.c</li>
+<li>getsetc.c</li>
+<li>handles.c</li>
+<li>hdata.c</li>
+<li>help.c</li>
+<li>hsz.c</li>
+<li>imectl.c</li>
+<li>immhotky.c</li>
+<li>instance.c</li>
+<li>lb1.c</li>
+<li>lboxctl1.c</li>
+<li>lboxctl2.c</li>
+<li>lboxctl3.c</li>
+<li>lboxrare.c</li>
+<li>mdimenu.c</li>
+<li>mdiwin.c</li>
+<li>menuc.c</li>
+<li>menuddc.c</li>
+<li>mmcl.c</li>
+<li>mngrayc.c</li>
+<li>monitor.c</li>
+<li>msgbox.c</li>
+<li>ntcftxt.h</li>
+<li>ntstubs.c</li>
+<li>oemxlate.c</li>
+<li>queuec.c</li>
+<li>random.c</li>
+<li>reader.c</li>
+<li>register.c</li>
+<li>rtlinit.c</li>
+<li>rtlres.c</li>
+<li>sbapi.c</li>
+<li>statctl.c</li>
+<li>stdptcl.c</li>
+<li>strings.c</li>
+<li>usercli.h</li>
+<li>winable.c</li>
+<li>winmgrc.c</li>
+<li>wsprintf.c</li>
+<li>wstrings.c</li>
+<li>xact.c</li>
+<li>combo.c</li>
+<li>wow.c</li>
+</ul>
+</li>
+<li>inc (Header Files)
+<ul>
+<li>ntcb.h</li>
+</ul>
+</li>
+<li>rtl (User32 Run-Time library)
+<ul>
+<li>chartran.c</li>
+<li>draw.c</li>
+<li>drawtext.c</li>
+<li>menu.c</li>
+<li>mmrtl.c</li>
+<li>winmgr.c</li>
+<li>wow.c</li>
+<li>winevent.c</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rtl (Win32k Run-Time Library)
+<ul>
+<li>debug.c</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 <footer>
 <p>© GeoB99's Homepage, 2020-2022 | HTML 5 and <a href=https://gohugo.io>Gohugo</a> powered | <a href=https://github.com/GeoB99>GitHub</a></p>

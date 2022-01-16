@@ -1,0 +1,678 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="GeoB99">
+<title>ntoskrnl tree</title>
+<link rel=stylesheet href=https://sigwait.github.io/GeoB99.github.io/css/style.css>
+<link rel=icon href=https://sigwait.github.io/GeoB99.github.io/images/Homepage-pic.png>
+<link rel=alternate type=application/rss+xml href=https://sigwait.github.io/GeoB99.github.io/index.xml title="GeoB99 Website">
+<meta property="og:title" content="ntoskrnl tree">
+<meta property="og:description" content="## Windows Server 2003 kernel source tree
+What you&rsquo;re seeing here is the NT kernel source tree layout of Windows Server 2003 (Service Pack 2). The source layout of Windows Server 2003 kernel is structured in a directory called ntos whereas base serves as the base operating system directory of Windows as a whole. You may wonder though, how did I obtain the said source layout of the NT kernel?">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sigwait.github.io/GeoB99.github.io/doc/ntoskrnl/tree/"><meta property="article:section" content="doc">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="ntoskrnl tree">
+<meta name=twitter:description content="## Windows Server 2003 kernel source tree
+What you&rsquo;re seeing here is the NT kernel source tree layout of Windows Server 2003 (Service Pack 2). The source layout of Windows Server 2003 kernel is structured in a directory called ntos whereas base serves as the base operating system directory of Windows as a whole. You may wonder though, how did I obtain the said source layout of the NT kernel?">
+</head>
+<body>
+<div class=container>
+<img src=https://sigwait.github.io/GeoB99.github.io/images/ROS.png alt="ReactOS Icon" align=left height=100 width=120 hspace=10>
+<h2>ReactOS Tutorials</h2>
+<h1>ntoskrnl tree</h2>
+<h4><a href=https://sigwait.github.io/GeoB99.github.io/ros-tutorials/>&lt;&lt; Go Back</a></h4>
+<hr>
+<p>## Windows Server 2003 kernel source tree</p>
+<p>What you&rsquo;re seeing here is the NT kernel source tree layout of Windows Server 2003 (Service Pack 2). The source layout of Windows Server 2003 kernel is structured in a directory called <strong>ntos</strong> whereas <strong>base</strong> serves as the base operating system directory of Windows as a whole. You may wonder though, how did I obtain the said source layout of the NT kernel?</p>
+<p>Debug checked system files contain debug information details in the binary files, alongside with source tree path strings. These strings are embedded within the checked files which are used by <code>RtlAssert</code> function. These strings can be obtained with <a href=https://docs.microsoft.com/en-us/sysinternals/downloads/strings>Strings (Sysinternals)</a>. Mark Russinovich also published the kernel layout tree of Windows XP Beta 2, <a href=https://web.archive.org/web/20061105012217/http://www.sysinternals.com/Information/WindowsXpSourceTree.html>here</a>. Although at the core the layout is basically the same between Windows Server 2003 and Windows XP Beta 2, there are some slight differences with some additional files being added.</p>
+<pre><code>  &lt;ul class = &quot;tree&quot;&gt;
+     &lt;li&gt;d:
+        &lt;ul&gt;
+           &lt;li&gt;base
+              &lt;ul&gt;
+                 &lt;li&gt;ntos
+                    &lt;ul&gt;
+                       &lt;!-- Arb --&gt;
+                       &lt;li&gt;arb (PnP Resource Arbiter)
+                          &lt;ul&gt;
+                             &lt;li&gt;arbiter.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Cache --&gt;
+                       &lt;li&gt;cache (Cache Manager -- Cc)
+                          &lt;ul&gt;
+                             &lt;li&gt;cachesub.c&lt;/li&gt;
+                             &lt;li&gt;ccperf.c&lt;/li&gt;
+                             &lt;li&gt;copysup.c&lt;/li&gt;
+                             &lt;li&gt;fssup.c&lt;/li&gt;
+                             &lt;li&gt;lazyrite.c&lt;/li&gt;
+                             &lt;li&gt;mdlsup.c&lt;/li&gt;
+                             &lt;li&gt;pinsup.c&lt;/li&gt;
+                             &lt;li&gt;prefboot.c&lt;/li&gt;
+                             &lt;li&gt;prefetch.c&lt;/li&gt;
+                             &lt;li&gt;prefparm.c&lt;/li&gt;
+                             &lt;li&gt;vacbsup.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Config --&gt;
+                       &lt;li&gt;config (Configuration Registry Manager)
+                          &lt;ul&gt;
+                             &lt;li&gt;i386
+                                &lt;ul&gt;
+                                   &lt;li&gt;geninst.c&lt;/li&gt;
+                                   &lt;li&gt;parseini.c&lt;/li&gt;
+                                   &lt;li&gt;rules.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;cmalloc.c&lt;/li&gt;
+                             &lt;li&gt;cmapi.c&lt;/li&gt;
+                             &lt;li&gt;cmapi2.c&lt;/li&gt;
+                             &lt;li&gt;cmboot.c&lt;/li&gt;
+                             &lt;li&gt;cmchek.c&lt;/li&gt;
+                             &lt;li&gt;cmchek2.c&lt;/li&gt;
+                             &lt;li&gt;cmclose.c&lt;/li&gt;
+                             &lt;li&gt;cmconfig.c&lt;/li&gt;
+                             &lt;li&gt;cmcontrl.c&lt;/li&gt;
+                             &lt;li&gt;cmdelay.c&lt;/li&gt;
+                             &lt;li&gt;cmdelete.c&lt;/li&gt;
+                             &lt;li&gt;cmdown.c&lt;/li&gt;
+                             &lt;li&gt;cmgquota.c&lt;/li&gt;
+                             &lt;li&gt;cmhook.c&lt;/li&gt;
+                             &lt;li&gt;cmhvlist.c&lt;/li&gt;
+                             &lt;li&gt;cmindex.c&lt;/li&gt;
+                             &lt;li&gt;cminit.c&lt;/li&gt;
+                             &lt;li&gt;cmmapvw.c&lt;/li&gt;
+                             &lt;li&gt;cmnotify.c&lt;/li&gt;
+                             &lt;li&gt;cmparse.c&lt;/li&gt;
+                             &lt;li&gt;cmparse2.c&lt;/li&gt;
+                             &lt;li&gt;cmsavres.c&lt;/li&gt;
+                             &lt;li&gt;cmse.c&lt;/li&gt;
+                             &lt;li&gt;cmsecache.c&lt;/li&gt;
+                             &lt;li&gt;cmsubs.c&lt;/li&gt;
+                             &lt;li&gt;cmsubs2.c&lt;/li&gt;
+                             &lt;li&gt;cmsubs3.c&lt;/li&gt;
+                             &lt;li&gt;cmsysini.c&lt;/li&gt;
+                             &lt;li&gt;cmsysini.c&lt;/li&gt;
+                             &lt;li&gt;cmtrecpy.c&lt;/li&gt;
+                             &lt;li&gt;cmtredel.c&lt;/li&gt;
+                             &lt;li&gt;cmtree.c&lt;/li&gt;
+                             &lt;li&gt;cmvalue.c&lt;/li&gt;
+                             &lt;li&gt;cmworker.c&lt;/li&gt;
+                             &lt;li&gt;cmwrapr.c&lt;/li&gt;
+                             &lt;li&gt;cmwrapr2.c&lt;/li&gt;
+                             &lt;li&gt;hivebin.c&lt;/li&gt;
+                             &lt;li&gt;hivecell.c&lt;/li&gt;
+                             &lt;li&gt;hivechek.c&lt;/li&gt;
+                             &lt;li&gt;hivefree.c&lt;/li&gt;
+                             &lt;li&gt;hivehint.c&lt;/li&gt;
+                             &lt;li&gt;hiveinit.c&lt;/li&gt;
+                             &lt;li&gt;hiveload.c&lt;/li&gt;
+                             &lt;li&gt;hivemap.c&lt;/li&gt;
+                             &lt;li&gt;hivesync.c&lt;/li&gt;
+                             &lt;li&gt;hwprofil.c&lt;/li&gt;
+                             &lt;li&gt;ntapi.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Dbgk --&gt;
+                       &lt;li&gt;dbgk (User-Mode Debugging Support)
+                          &lt;ul&gt;
+                             &lt;li&gt;dbgkobj.c&lt;/li&gt;
+                             &lt;li&gt;dbgkport.c&lt;/li&gt;
+                             &lt;li&gt;dbgkproc.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Ex --&gt;
+                       &lt;li&gt;ex (Kernel Executive)
+                          &lt;ul&gt;
+                             &lt;li&gt;callback.c&lt;/li&gt;
+                             &lt;li&gt;exatom.c&lt;/li&gt;
+                             &lt;li&gt;exhotp.c&lt;/li&gt;
+                             &lt;li&gt;exinit.c&lt;/li&gt;
+                             &lt;li&gt;handle.c&lt;/li&gt;
+                             &lt;li&gt;harderr.c&lt;/li&gt;
+                             &lt;li&gt;hdlsterm.c&lt;/li&gt;
+                             &lt;li&gt;keyedevent.c&lt;/li&gt;
+                             &lt;li&gt;pool.c&lt;/li&gt;
+                             &lt;li&gt;probe.c&lt;/li&gt;
+                             &lt;li&gt;profile.c&lt;/li&gt;
+                             &lt;li&gt;pushlock.c&lt;/li&gt;
+                             &lt;li&gt;resource.c&lt;/li&gt;
+                             &lt;li&gt;rundown.c&lt;/li&gt;
+                             &lt;li&gt;sysinfo.c&lt;/li&gt;
+                             &lt;li&gt;systime.c&lt;/li&gt;
+                             &lt;li&gt;uuid.c&lt;/li&gt;
+                             &lt;li&gt;win32.c&lt;/li&gt;
+                             &lt;li&gt;worker.c&lt;/li&gt;
+                             &lt;li&gt;xipdisp.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Fsrtl --&gt;
+                       &lt;li&gt;fsrtl (File System Run-Time library)
+                          &lt;ul&gt;
+                             &lt;li&gt;dbcsname.c&lt;/li&gt;
+                             &lt;li&gt;fastio.c&lt;/li&gt;
+                             &lt;li&gt;faulttol.c&lt;/li&gt;
+                             &lt;li&gt;filelock.c&lt;/li&gt;
+                             &lt;li&gt;filtrctx.c&lt;/li&gt;
+                             &lt;li&gt;fsfilter.c&lt;/li&gt;
+                             &lt;li&gt;fsrtlpc.c&lt;/li&gt;
+                             &lt;li&gt;largemcb.c&lt;/li&gt;
+                             &lt;li&gt;name.c&lt;/li&gt;
+                             &lt;li&gt;notify.c&lt;/li&gt;
+                             &lt;li&gt;oplock.c&lt;/li&gt;
+                             &lt;li&gt;pnp.c&lt;/li&gt;
+                             &lt;li&gt;tunnel.c&lt;/li&gt;
+                             &lt;li&gt;unc.c&lt;/li&gt;
+                             &lt;li&gt;drivesup.c&lt;/li&gt;
+                             &lt;li&gt;ex.c&lt;/li&gt;
+                             &lt;li&gt;halfnc.c&lt;/li&gt;
+                             &lt;li&gt;translate.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Inc --&gt;
+                       &lt;li&gt;inc (Header Files)
+                          &lt;ul&gt;
+                             &lt;li&gt;ex.h&lt;/li&gt;
+                             &lt;li&gt;ke.h&lt;/li&gt;
+                             &lt;li&gt;kx.h&lt;/li&gt;
+                             &lt;li&gt;ob.h&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Init --&gt;
+                       &lt;li&gt;init (Kernel system initialization)
+                          &lt;ul&gt;
+                             &lt;li&gt;bootvid.c&lt;/li&gt;
+                             &lt;li&gt;init.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Io --&gt;
+                       &lt;li&gt;io (I/O and PnP managers)
+                          &lt;ul&gt;
+                             &lt;li&gt;
+                                iomgr
+                                &lt;ul&gt;
+                                   &lt;li&gt;cancelapi.c&lt;/li&gt;
+                                   &lt;li&gt;complete.c&lt;/li&gt;
+                                   &lt;li&gt;create.c&lt;/li&gt;
+                                   &lt;li&gt;dev2dos.c&lt;/li&gt;
+                                   &lt;li&gt;dir.c&lt;/li&gt;
+                                   &lt;li&gt;dumpctl.c&lt;/li&gt;
+                                   &lt;li&gt;errorlog.c&lt;/li&gt;
+                                   &lt;li&gt;internal.c&lt;/li&gt;
+                                   &lt;li&gt;ioinit.c&lt;/li&gt;
+                                   &lt;li&gt;ioperf.c&lt;/li&gt;
+                                   &lt;li&gt;iosubs.c&lt;/li&gt;
+                                   &lt;li&gt;ioverifier.c&lt;/li&gt;
+                                   &lt;li&gt;loadunld.c&lt;/li&gt;
+                                   &lt;li&gt;lock.c&lt;/li&gt;
+                                   &lt;li&gt;misc.c&lt;/li&gt;
+                                   &lt;li&gt;objsup.c&lt;/li&gt;
+                                   &lt;li&gt;open.c&lt;/li&gt;
+                                   &lt;li&gt;parse.c&lt;/li&gt;
+                                   &lt;li&gt;qsea.c&lt;/li&gt;
+                                   &lt;li&gt;qsfs.c&lt;/li&gt;
+                                   &lt;li&gt;qsinfo.c&lt;/li&gt;
+                                   &lt;li&gt;qsquota.c&lt;/li&gt;
+                                   &lt;li&gt;query.c&lt;/li&gt;
+                                   &lt;li&gt;read.c&lt;/li&gt;
+                                   &lt;li&gt;triage.c&lt;/li&gt;
+                                   &lt;li&gt;write.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;
+                                pnpmgr
+                                &lt;ul&gt;
+                                   &lt;li&gt;assign.c&lt;/li&gt;
+                                   &lt;li&gt;convert.c&lt;/li&gt;
+                                   &lt;li&gt;devices.c&lt;/li&gt;
+                                   &lt;li&gt;devintrf.c&lt;/li&gt;
+                                   &lt;li&gt;devnode.c&lt;/li&gt;
+                                   &lt;li&gt;dockhwp.c&lt;/li&gt;
+                                   &lt;li&gt;iofileutil.c&lt;/li&gt;
+                                   &lt;li&gt;mapper.c&lt;/li&gt;
+                                   &lt;li&gt;notify.c&lt;/li&gt;
+                                   &lt;li&gt;pnpbusno.c&lt;/li&gt;
+                                   &lt;li&gt;pnpdd.c&lt;/li&gt;
+                                   &lt;li&gt;pnpdel.c&lt;/li&gt;
+                                   &lt;li&gt;pnpdma.c&lt;/li&gt;
+                                   &lt;li&gt;pnpenum.c&lt;/li&gt;
+                                   &lt;li&gt;pnpevent.c&lt;/li&gt;
+                                   &lt;li&gt;pnpinit.c&lt;/li&gt;
+                                   &lt;li&gt;pnpioapi.c&lt;/li&gt;
+                                   &lt;li&gt;pnpirp.c&lt;/li&gt;
+                                   &lt;li&gt;pnpirq.c&lt;/li&gt;
+                                   &lt;li&gt;pnpmap.c&lt;/li&gt;
+                                   &lt;li&gt;pnpmemio.c&lt;/li&gt;
+                                   &lt;li&gt;pnppower.c&lt;/li&gt;
+                                   &lt;li&gt;pnpres.c&lt;/li&gt;
+                                   &lt;li&gt;pnprlist.c&lt;/li&gt;
+                                   &lt;li&gt;pnpstart.c&lt;/li&gt;
+                                   &lt;li&gt;pnpsubs.c&lt;/li&gt;
+                                   &lt;li&gt;ppcddb.c&lt;/li&gt;
+                                   &lt;li&gt;ppcontrol.c&lt;/li&gt;
+                                   &lt;li&gt;ppdrvdb.c&lt;/li&gt;
+                                   &lt;li&gt;pphotswap.c&lt;/li&gt;
+                                   &lt;li&gt;pppagepath.c&lt;/li&gt;
+                                   &lt;li&gt;ppprofile.c&lt;/li&gt;
+                                   &lt;li&gt;remlock.c&lt;/li&gt;
+                                   &lt;li&gt;report.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;i386
+                                &lt;ul&gt;
+                                   &lt;li&gt;pbiosc.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;iovutil.c&lt;/li&gt;
+                             &lt;li&gt;netboot.c&lt;/li&gt;
+                             &lt;li&gt;sessnirp.c&lt;/li&gt;
+                             &lt;li&gt;trackirp.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Kd64 --&gt;
+                       &lt;li&gt;kd64 (64-bit Kernel Debugger)
+                          &lt;ul&gt;
+                             &lt;li&gt;kdcpuapi.c&lt;/li&gt;
+                             &lt;li&gt;kdapi.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Ke --&gt;
+                       &lt;li&gt;ke (Kernel)
+                          &lt;ul&gt;
+                             &lt;li&gt;i386
+                                &lt;ul&gt;
+                                   &lt;li&gt;allproc.c&lt;/li&gt;
+                                   &lt;li&gt;apcuser.c&lt;/li&gt;
+                                   &lt;li&gt;biosc.c&lt;/li&gt;
+                                   &lt;li&gt;callback.c&lt;/li&gt;
+                                   &lt;li&gt;cyrix.c&lt;/li&gt;
+                                   &lt;li&gt;exceptn.c&lt;/li&gt;
+                                   &lt;li&gt;flushtb.c&lt;/li&gt;
+                                   &lt;li&gt;gdtsup.c&lt;/li&gt;
+                                   &lt;li&gt;intobj.c&lt;/li&gt;
+                                   &lt;li&gt;kernlini.c&lt;/li&gt;
+                                   &lt;li&gt;largepag.c&lt;/li&gt;
+                                   &lt;li&gt;misc.c&lt;/li&gt;
+                                   &lt;li&gt;mtrr.c&lt;/li&gt;
+                                   &lt;li&gt;mtrramd.c&lt;/li&gt;
+                                   &lt;li&gt;pat.c&lt;/li&gt;
+                                   &lt;li&gt;vdm.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;apcobj.c&lt;/li&gt;
+                             &lt;li&gt;apcsup.c&lt;/li&gt;
+                             &lt;li&gt;balmgr.c&lt;/li&gt;
+                             &lt;li&gt;bugcheck.c&lt;/li&gt;
+                             &lt;li&gt;devquobj.c&lt;/li&gt;
+                             &lt;li&gt;dpcobj.c&lt;/li&gt;
+                             &lt;li&gt;dpcsup.c&lt;/li&gt;
+                             &lt;li&gt;eventobj.c&lt;/li&gt;
+                             &lt;li&gt;gateobj.c&lt;/li&gt;
+                             &lt;li&gt;idsched.c&lt;/li&gt;
+                             &lt;li&gt;miscc.c&lt;/li&gt;
+                             &lt;li&gt;mutntobj.c&lt;/li&gt;
+                             &lt;li&gt;procobj.c&lt;/li&gt;
+                             &lt;li&gt;profobj.c&lt;/li&gt;
+                             &lt;li&gt;queueobj.c&lt;/li&gt;
+                             &lt;li&gt;semphobj.c&lt;/li&gt;
+                             &lt;li&gt;thredobj.c&lt;/li&gt;
+                             &lt;li&gt;thredsup.c&lt;/li&gt;
+                             &lt;li&gt;timerobj.c&lt;/li&gt;
+                             &lt;li&gt;timersup.c&lt;/li&gt;
+                             &lt;li&gt;wait.c&lt;/li&gt;
+                             &lt;li&gt;waitsup.c&lt;/li&gt;
+                             &lt;li&gt;yield.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Lpc --&gt;
+                       &lt;li&gt;lpc (Local Procedure Call)
+                          &lt;ul&gt;
+                             &lt;li&gt;lpcclose.c&lt;/li&gt;
+                             &lt;li&gt;lpccompl.c&lt;/li&gt;
+                             &lt;li&gt;lpcconn.c&lt;/li&gt;
+                             &lt;li&gt;lpccreat.c&lt;/li&gt;
+                             &lt;li&gt;lpclistn.c&lt;/li&gt;
+                             &lt;li&gt;lpcpriv.c&lt;/li&gt;
+                             &lt;li&gt;lpcquery.c&lt;/li&gt;
+                             &lt;li&gt;lpcqueue.c&lt;/li&gt;
+                             &lt;li&gt;lpcrecv.c&lt;/li&gt;
+                             &lt;li&gt;lpcreply.c&lt;/li&gt;
+                             &lt;li&gt;lpcsend.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Mm --&gt;
+                       &lt;li&gt;mm (Memory Manager)
+                          &lt;ul&gt;
+                             &lt;li&gt;i386
+                                &lt;ul&gt;
+                                   &lt;li&gt;init386.c&lt;/li&gt;
+                                   &lt;li&gt;procx86.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;acceschk.c&lt;/li&gt;
+                             &lt;li&gt;addrsup.c&lt;/li&gt;
+                             &lt;li&gt;allocpag.c&lt;/li&gt;
+                             &lt;li&gt;allocvm.c&lt;/li&gt;
+                             &lt;li&gt;crashdmp.c&lt;/li&gt;
+                             &lt;li&gt;creasect.c&lt;/li&gt;
+                             &lt;li&gt;debugsup.c&lt;/li&gt;
+                             &lt;li&gt;deleteva.c&lt;/li&gt;
+                             &lt;li&gt;dmpaddr.c&lt;/li&gt;
+                             &lt;li&gt;dynmem.c&lt;/li&gt;
+                             &lt;li&gt;extsect.c&lt;/li&gt;
+                             &lt;li&gt;flushsec.c&lt;/li&gt;
+                             &lt;li&gt;forksup.c&lt;/li&gt;
+                             &lt;li&gt;freevm.c&lt;/li&gt;
+                             &lt;li&gt;hypermap.c&lt;/li&gt;
+                             &lt;li&gt;iosup.c&lt;/li&gt;
+                             &lt;li&gt;lockvm.c&lt;/li&gt;
+                             &lt;li&gt;mapcache.c&lt;/li&gt;
+                             &lt;li&gt;mapview.c&lt;/li&gt;
+                             &lt;li&gt;mirror.c&lt;/li&gt;
+                             &lt;li&gt;mmfault.c&lt;/li&gt;
+                             &lt;li&gt;mminit.c&lt;/li&gt;
+                             &lt;li&gt;mmpatch.c&lt;/li&gt;
+                             &lt;li&gt;mmquota.c&lt;/li&gt;
+                             &lt;li&gt;mmsup.c&lt;/li&gt;
+                             &lt;li&gt;modwrite.c&lt;/li&gt;
+                             &lt;li&gt;pagfault.c&lt;/li&gt;
+                             &lt;li&gt;pfndec.c&lt;/li&gt;
+                             &lt;li&gt;pfnlist.c&lt;/li&gt;
+                             &lt;li&gt;pfsup.c&lt;/li&gt;
+                             &lt;li&gt;physical.c&lt;/li&gt;
+                             &lt;li&gt;procsup.c&lt;/li&gt;
+                             &lt;li&gt;protect.c&lt;/li&gt;
+                             &lt;li&gt;querysec.c&lt;/li&gt;
+                             &lt;li&gt;queryvm.c&lt;/li&gt;
+                             &lt;li&gt;readwrt.c&lt;/li&gt;
+                             &lt;li&gt;sectsup.c&lt;/li&gt;
+                             &lt;li&gt;session.c&lt;/li&gt;
+                             &lt;li&gt;sessload.c&lt;/li&gt;
+                             &lt;li&gt;shutdown.c&lt;/li&gt;
+                             &lt;li&gt;specpool.c&lt;/li&gt;
+                             &lt;li&gt;sysload.c&lt;/li&gt;
+                             &lt;li&gt;sysptes.c&lt;/li&gt;
+                             &lt;li&gt;triage.c&lt;/li&gt;
+                             &lt;li&gt;umapview.c&lt;/li&gt;
+                             &lt;li&gt;vadtree.c&lt;/li&gt;
+                             &lt;li&gt;verifier.c&lt;/li&gt;
+                             &lt;li&gt;wrtfault.c&lt;/li&gt;
+                             &lt;li&gt;wrtwatch.c&lt;/li&gt;
+                             &lt;li&gt;wslist.c&lt;/li&gt;
+                             &lt;li&gt;wsmanage.c&lt;/li&gt;
+                             &lt;li&gt;wstree.c&lt;/li&gt;
+                             &lt;li&gt;zeropage.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Ob --&gt;
+                       &lt;li&gt;ob (Object Manager)
+                          &lt;ul&gt;
+                             &lt;li&gt;obclose.c&lt;/li&gt;
+                             &lt;li&gt;obcreate.c&lt;/li&gt;
+                             &lt;li&gt;obdevmap.c&lt;/li&gt;
+                             &lt;li&gt;obdir.c&lt;/li&gt;
+                             &lt;li&gt;obhandle.c&lt;/li&gt;
+                             &lt;li&gt;obinit.c&lt;/li&gt;
+                             &lt;li&gt;obinsert.c&lt;/li&gt;
+                             &lt;li&gt;oblink.c&lt;/li&gt;
+                             &lt;li&gt;obquery.c&lt;/li&gt;
+                             &lt;li&gt;obref.c&lt;/li&gt;
+                             &lt;li&gt;obsdata.c&lt;/li&gt;
+                             &lt;li&gt;obse.c&lt;/li&gt;
+                             &lt;li&gt;obtype.c&lt;/li&gt;
+                             &lt;li&gt;obvutil.c&lt;/li&gt;
+                             &lt;li&gt;obwait.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Perf --&gt;
+                       &lt;li&gt;perf (Performance Monitoring Manager)
+                          &lt;ul&gt;
+                             &lt;li&gt;hooks.c&lt;/li&gt;
+                             &lt;li&gt;logging.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Po --&gt;
+                       &lt;li&gt;po (Power Manager)
+                          &lt;ul&gt;
+                             &lt;li&gt;attrib.c&lt;/li&gt;
+                             &lt;li&gt;hiber.c&lt;/li&gt;
+                             &lt;li&gt;idle.c&lt;/li&gt;
+                             &lt;li&gt;misc.c&lt;/li&gt;
+                             &lt;li&gt;notify.c&lt;/li&gt;
+                             &lt;li&gt;ntapi.c&lt;/li&gt;
+                             &lt;li&gt;paction.c&lt;/li&gt;
+                             &lt;li&gt;pbatt.c&lt;/li&gt;
+                             &lt;li&gt;pidle.c&lt;/li&gt;
+                             &lt;li&gt;pinfo.c&lt;/li&gt;
+                             &lt;li&gt;pocall.c&lt;/li&gt;
+                             &lt;li&gt;poinit.c&lt;/li&gt;
+                             &lt;li&gt;poshtdwn.c&lt;/li&gt;
+                             &lt;li&gt;postate.c&lt;/li&gt;
+                             &lt;li&gt;pwork.c&lt;/li&gt;
+                             &lt;li&gt;switch.c&lt;/li&gt;
+                             &lt;li&gt;sys.c&lt;/li&gt;
+                             &lt;li&gt;sysdev.c&lt;/li&gt;
+                             &lt;li&gt;thermal.c&lt;/li&gt;
+                             &lt;li&gt;throttle.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Ps --&gt;
+                       &lt;li&gt;ps (Process Manager)
+                          &lt;ul&gt;
+                             &lt;li&gt;i386
+                                &lt;ul&gt;
+                                   &lt;li&gt;psctx386.c&lt;/li&gt;
+                                   &lt;li&gt;psldt.c&lt;/li&gt;
+                                   &lt;li&gt;psvdm.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;create.c&lt;/li&gt;
+                             &lt;li&gt;pscid.c&lt;/li&gt;
+                             &lt;li&gt;psctx.c&lt;/li&gt;
+                             &lt;li&gt;psdelete.c&lt;/li&gt;
+                             &lt;li&gt;psenum.c&lt;/li&gt;
+                             &lt;li&gt;pshelper.c&lt;/li&gt;
+                             &lt;li&gt;psinit.c&lt;/li&gt;
+                             &lt;li&gt;psjob.c&lt;/li&gt;
+                             &lt;li&gt;psopen.c&lt;/li&gt;
+                             &lt;li&gt;psquery.c&lt;/li&gt;
+                             &lt;li&gt;psquota.c&lt;/li&gt;
+                             &lt;li&gt;psspnd.c&lt;/li&gt;
+                             &lt;li&gt;security.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Raw --&gt;
+                       &lt;li&gt;raw (Unmounted File System Driver)
+                          &lt;ul&gt;
+                             &lt;li&gt;cleanup.c&lt;/li&gt;
+                             &lt;li&gt;close.c&lt;/li&gt;
+                             &lt;li&gt;create.c&lt;/li&gt;
+                             &lt;li&gt;fileinfo.c&lt;/li&gt;
+                             &lt;li&gt;fsctrl.c&lt;/li&gt;
+                             &lt;li&gt;rawdisp.c&lt;/li&gt;
+                             &lt;li&gt;readwrit.c&lt;/li&gt;
+                             &lt;li&gt;strucsup.c&lt;/li&gt;
+                             &lt;li&gt;strucsup.c&lt;/li&gt;
+                             &lt;li&gt;volinfo.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Rtl --&gt;
+                       &lt;li&gt;rtl (Run-Time Kernel Library)
+                          &lt;ul&gt;
+                             &lt;li&gt;i386
+                                &lt;ul&gt;
+                                   &lt;li&gt;context.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;acledit.c&lt;/li&gt;
+                             &lt;li&gt;atom.c&lt;/li&gt;
+                             &lt;li&gt;avltable.c&lt;/li&gt;
+                             &lt;li&gt;bitmap.c&lt;/li&gt;
+                             &lt;li&gt;bootstatus.c&lt;/li&gt;
+                             &lt;li&gt;checksum.c&lt;/li&gt;
+                             &lt;li&gt;cnvint.c&lt;/li&gt;
+                             &lt;li&gt;compress.c&lt;/li&gt;
+                             &lt;li&gt;excptdbg.c&lt;/li&gt;
+                             &lt;li&gt;gen8dot3.c&lt;/li&gt;
+                             &lt;li&gt;gentable.c&lt;/li&gt;
+                             &lt;li&gt;guid.c&lt;/li&gt;
+                             &lt;li&gt;heap.c&lt;/li&gt;
+                             &lt;li&gt;ldrreloc.c&lt;/li&gt;
+                             &lt;li&gt;ldrrsrc.c&lt;/li&gt;
+                             &lt;li&gt;lznt1.c&lt;/li&gt;
+                             &lt;li&gt;message.c&lt;/li&gt;
+                             &lt;li&gt;nls.c&lt;/li&gt;
+                             &lt;li&gt;nlsxlat.c&lt;/li&gt;
+                             &lt;li&gt;prefix.c&lt;/li&gt;
+                             &lt;li&gt;prodtype.c&lt;/li&gt;
+                             &lt;li&gt;random.c&lt;/li&gt;
+                             &lt;li&gt;range.c&lt;/li&gt;
+                             &lt;li&gt;regutil.c&lt;/li&gt;
+                             &lt;li&gt;rtlassig.c&lt;/li&gt;
+                             &lt;li&gt;rtldowncaseunicodechar.c&lt;/li&gt;
+                             &lt;li&gt;rtlvalidateunicodestring.c&lt;/li&gt;
+                             &lt;li&gt;sertl.c&lt;/li&gt;
+                             &lt;li&gt;string.c&lt;/li&gt;
+                             &lt;li&gt;tracedb.c&lt;/li&gt;
+                             &lt;li&gt;version.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Se --&gt;
+                       &lt;li&gt;se (Security Monitoring Manager)
+                          &lt;ul&gt;
+                             &lt;li&gt;accessck.c&lt;/li&gt;
+                             &lt;li&gt;adtinit.c&lt;/li&gt;
+                             &lt;li&gt;adtlog.c&lt;/li&gt;
+                             &lt;li&gt;adtutil.c&lt;/li&gt;
+                             &lt;li&gt;capture.c&lt;/li&gt;
+                             &lt;li&gt;privileg.c&lt;/li&gt;
+                             &lt;li&gt;rmaudit.c&lt;/li&gt;
+                             &lt;li&gt;rmlogon.c&lt;/li&gt;
+                             &lt;li&gt;rmmain.c&lt;/li&gt;
+                             &lt;li&gt;rmvars.c&lt;/li&gt;
+                             &lt;li&gt;seassign.c&lt;/li&gt;
+                             &lt;li&gt;seastate.c&lt;/li&gt;
+                             &lt;li&gt;seaudit.c&lt;/li&gt;
+                             &lt;li&gt;seclient.c&lt;/li&gt;
+                             &lt;li&gt;seglobal.c&lt;/li&gt;
+                             &lt;li&gt;seinit.c&lt;/li&gt;
+                             &lt;li&gt;semethod.c&lt;/li&gt;
+                             &lt;li&gt;sepaudit.c&lt;/li&gt;
+                             &lt;li&gt;subject.c&lt;/li&gt;
+                             &lt;li&gt;token.c&lt;/li&gt;
+                             &lt;li&gt;tokenadj.c&lt;/li&gt;
+                             &lt;li&gt;tokendup.c&lt;/li&gt;
+                             &lt;li&gt;tokenopn.c&lt;/li&gt;
+                             &lt;li&gt;tokenp.h&lt;/li&gt;
+                             &lt;li&gt;tokenqry.c&lt;/li&gt;
+                             &lt;li&gt;tokenset.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Vdm --&gt;
+                       &lt;li&gt;vdm (Virtual DOS Machine)
+                          &lt;ul&gt;
+                             &lt;li&gt;rdwr.c&lt;/li&gt;
+                             &lt;li&gt;strtexec.c&lt;/li&gt;
+                             &lt;li&gt;vdmentry.c&lt;/li&gt;
+                             &lt;li&gt;vdmfault.c&lt;/li&gt;
+                             &lt;li&gt;vdminit.c&lt;/li&gt;
+                             &lt;li&gt;vdmints.c&lt;/li&gt;
+                             &lt;li&gt;vdmnpx.c&lt;/li&gt;
+                             &lt;li&gt;vdmprint.c&lt;/li&gt;
+                             &lt;li&gt;vdmtib.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Verifier --&gt;
+                       &lt;li&gt;verifier (Driver verifier)
+                          &lt;ul&gt;
+                             &lt;li&gt;vfddi.c&lt;/li&gt;
+                             &lt;li&gt;vfdeadlock.c&lt;/li&gt;
+                             &lt;li&gt;vfdevobj.c&lt;/li&gt;
+                             &lt;li&gt;vffilter.c&lt;/li&gt;
+                             &lt;li&gt;vfgeneric.c&lt;/li&gt;
+                             &lt;li&gt;vfhal.c&lt;/li&gt;
+                             &lt;li&gt;vfirp.c&lt;/li&gt;
+                             &lt;li&gt;vfirpdb.c&lt;/li&gt;
+                             &lt;li&gt;vfirplog.c&lt;/li&gt;
+                             &lt;li&gt;vfmessage.c&lt;/li&gt;
+                             &lt;li&gt;vfpacket.c&lt;/li&gt;
+                             &lt;li&gt;vfpnp.c&lt;/li&gt;
+                             &lt;li&gt;vfpower.c&lt;/li&gt;
+                             &lt;li&gt;vfwmi.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+
+                       &lt;!-- Wmi --&gt;
+                       &lt;li&gt;wmi (Windows Management Instrumentation)
+                          &lt;ul&gt;
+                             &lt;li&gt;i386
+                                &lt;ul&gt;
+                                   &lt;li&gt;mcaevent.c&lt;/li&gt;
+                                &lt;/ul&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;alloc.c&lt;/li&gt;
+                             &lt;li&gt;api.c&lt;/li&gt;
+                             &lt;li&gt;callouts.c&lt;/li&gt;
+                             &lt;li&gt;chunk.c&lt;/li&gt;
+                             &lt;li&gt;consumer.c&lt;/li&gt;
+                             &lt;li&gt;dataprov.c&lt;/li&gt;
+                             &lt;li&gt;ds.c&lt;/li&gt;
+                             &lt;li&gt;enabdisa.c&lt;/li&gt;
+                             &lt;li&gt;globalog.c&lt;/li&gt;
+                             &lt;li&gt;mca.c&lt;/li&gt;
+                             &lt;li&gt;notify.c&lt;/li&gt;
+                             &lt;li&gt;provider.c&lt;/li&gt;
+                             &lt;li&gt;register.c&lt;/li&gt;
+                             &lt;li&gt;secure.c&lt;/li&gt;
+                             &lt;li&gt;smbios.c&lt;/li&gt;
+                             &lt;li&gt;traceapi.c&lt;/li&gt;
+                             &lt;li&gt;tracelog.c&lt;/li&gt;
+                             &lt;li&gt;tracesup.c&lt;/li&gt;
+                             &lt;li&gt;wmi.c&lt;/li&gt;
+                          &lt;/ul&gt;
+                       &lt;/li&gt;
+                    &lt;/ul&gt;
+                 &lt;/li&gt;
+              &lt;/ul&gt;
+           &lt;/li&gt;
+        &lt;/ul&gt;
+     &lt;/li&gt;
+  &lt;/ul&gt;</code></pre>
+</div>
+<footer>
+<p>© GeoB99's Homepage, 2020-2022 | HTML 5 and <a href=https://gohugo.io>Gohugo</a> powered | <a href=https://github.com/GeoB99>GitHub</a></p>
+</footer>
+</body>
+</html>
