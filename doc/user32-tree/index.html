@@ -1,0 +1,165 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="GeoB99">
+<title>User32 Tree</title>
+<link rel=stylesheet href=https://sigwait.github.io/GeoB99.github.io/css/style.css>
+<link rel=icon href=https://sigwait.github.io/GeoB99.github.io/images/Homepage-pic.png>
+<link rel=alternate type=application/rss+xml href=https://sigwait.github.io/GeoB99.github.io/index.xml title="GeoB99 Website">
+<meta property="og:title" content="User32 Tree">
+<meta property="og:description" content="User32 user-mode library layout tree User32.dll is a user mode DLL library that provides windowing manager APIs to the client. An example of a call brought by the said library is CreateWindowExW which creates a window with extended styles. The documented function calls in the User32.dll library rely on undocumented internal functions in Win32k, the kernel mode side of the Windows subsystem.
+d:  nt  windows (Windows Subsystem)  core (Core Windows Kernel Subsystem)  ntuser (Native USER Window Manager)  client (USER user-mode library)  acons.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sigwait.github.io/GeoB99.github.io/doc/user32-tree/"><meta property="article:section" content="doc">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="User32 Tree">
+<meta name=twitter:description content="User32 user-mode library layout tree User32.dll is a user mode DLL library that provides windowing manager APIs to the client. An example of a call brought by the said library is CreateWindowExW which creates a window with extended styles. The documented function calls in the User32.dll library rely on undocumented internal functions in Win32k, the kernel mode side of the Windows subsystem.
+d:  nt  windows (Windows Subsystem)  core (Core Windows Kernel Subsystem)  ntuser (Native USER Window Manager)  client (USER user-mode library)  acons.">
+</head>
+<body>
+<div class=container>
+<img src=https://sigwait.github.io/GeoB99.github.io/images/ROS.png alt="ReactOS Icon" align=left height=100 width=120 hspace=10>
+<h2>ReactOS Tutorials</h2>
+<h1>User32 Tree</h2>
+<h4><a href=https://sigwait.github.io/GeoB99.github.io/ros-tutorials/>&lt;&lt; Go Back</a></h4>
+<hr>
+&lt;h2 id="user32-user-mode-library-layout-tree">User32 user-mode library layout tree&lt;/h2>
+&lt;p>&lt;strong>User32.dll&lt;/strong> is a user mode DLL library that provides windowing manager APIs to the client. An example of a call brought by the said library is &lt;code>CreateWindowExW&lt;/code> which creates a window with extended styles. The documented function calls in the &lt;strong>User32.dll&lt;/strong> library rely on undocumented internal functions in Win32k, the kernel mode side of the Windows subsystem.&lt;/p>
+&lt;ul class = "tree">
+&lt;li>d:
+&lt;ul>
+&lt;li>nt
+&lt;ul>
+&lt;li>windows (Windows Subsystem)
+&lt;ul>
+&lt;li>core (Core Windows Kernel Subsystem)
+&lt;ul>
+&lt;!-- Native USER Window Manager -->
+&lt;li>ntuser (Native USER Window Manager)
+&lt;ul>
+&lt;!-- USER user-mode library -->
+&lt;li>client (USER user-mode library)
+&lt;ul>
+&lt;li>acons.c&lt;/li>
+&lt;li>btnctl.c&lt;/li>
+&lt;li>callback.c&lt;/li>
+&lt;li>classc.c&lt;/li>
+&lt;li>cldib.c&lt;/li>
+&lt;li>clenum.c&lt;/li>
+&lt;li>clhook.c&lt;/li>
+&lt;li>client.c&lt;/li>
+&lt;li>clinit.c&lt;/li>
+&lt;li>clmenu.c&lt;/li>
+&lt;li>clmsg.c&lt;/li>
+&lt;li>clrect.c&lt;/li>
+&lt;li>clres.c&lt;/li>
+&lt;li>cltxt.h&lt;/li>
+&lt;li>combodir.c&lt;/li>
+&lt;li>comboini.c&lt;/li>
+&lt;li>connect.c&lt;/li>
+&lt;li>csrstubs.c&lt;/li>
+&lt;li>ddemlcli.c&lt;/li>
+&lt;li>ddemlwp.c&lt;/li>
+&lt;li>ddetrack.c&lt;/li>
+&lt;li>dlgbegin.c&lt;/li>
+&lt;li>dlgend.c&lt;/li>
+&lt;li>dlgmgr.c&lt;/li>
+&lt;li>dlgmgr2.c&lt;/li>
+&lt;li>dlgmgrc.c&lt;/li>
+&lt;li>dmmnem.c&lt;/li>
+&lt;li>draw.c&lt;/li>
+&lt;li>drawtext.c&lt;/li>
+&lt;li>edecrare.c&lt;/li>
+&lt;li>editec.c&lt;/li>
+&lt;li>editml.c&lt;/li>
+&lt;li>editsl.c&lt;/li>
+&lt;li>edmlrare.c&lt;/li>
+&lt;li>fareast.c&lt;/li>
+&lt;li>fntsweep.c&lt;/li>
+&lt;li>getsetc.c&lt;/li>
+&lt;li>handles.c&lt;/li>
+&lt;li>hdata.c&lt;/li>
+&lt;li>help.c&lt;/li>
+&lt;li>hsz.c&lt;/li>
+&lt;li>imectl.c&lt;/li>
+&lt;li>immhotky.c&lt;/li>
+&lt;li>instance.c&lt;/li>
+&lt;li>lb1.c&lt;/li>
+&lt;li>lboxctl1.c&lt;/li>
+&lt;li>lboxctl2.c&lt;/li>
+&lt;li>lboxctl3.c&lt;/li>
+&lt;li>lboxrare.c&lt;/li>
+&lt;li>mdimenu.c&lt;/li>
+&lt;li>mdiwin.c&lt;/li>
+&lt;li>menuc.c&lt;/li>
+&lt;li>menuddc.c&lt;/li>
+&lt;li>mmcl.c&lt;/li>
+&lt;li>mngrayc.c&lt;/li>
+&lt;li>monitor.c&lt;/li>
+&lt;li>msgbox.c&lt;/li>
+&lt;li>ntcftxt.h&lt;/li>
+&lt;li>ntstubs.c&lt;/li>
+&lt;li>oemxlate.c&lt;/li>
+&lt;li>queuec.c&lt;/li>
+&lt;li>random.c&lt;/li>
+&lt;li>reader.c&lt;/li>
+&lt;li>register.c&lt;/li>
+&lt;li>rtlinit.c&lt;/li>
+&lt;li>rtlres.c&lt;/li>
+&lt;li>sbapi.c&lt;/li>
+&lt;li>statctl.c&lt;/li>
+&lt;li>stdptcl.c&lt;/li>
+&lt;li>strings.c&lt;/li>
+&lt;li>usercli.h&lt;/li>
+&lt;li>winable.c&lt;/li>
+&lt;li>winmgrc.c&lt;/li>
+&lt;li>wsprintf.c&lt;/li>
+&lt;li>wstrings.c&lt;/li>
+&lt;li>xact.c&lt;/li>
+&lt;li>combo.c&lt;/li>
+&lt;li>wow.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Header files -->
+&lt;li>inc (Header Files)
+&lt;ul>
+&lt;li>ntcb.h&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- User32 Run-Time Library -->
+&lt;li>rtl (User32 Run-Time library)
+&lt;ul>
+&lt;li>chartran.c&lt;/li>
+&lt;li>draw.c&lt;/li>
+&lt;li>drawtext.c&lt;/li>
+&lt;li>menu.c&lt;/li>
+&lt;li>mmrtl.c&lt;/li>
+&lt;li>winmgr.c&lt;/li>
+&lt;li>wow.c&lt;/li>
+&lt;li>winevent.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Win32k Run-Time Library -->
+&lt;li>rtl (Win32k Run-Time Library)
+&lt;ul>
+&lt;li>debug.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+</div>
+<footer>
+<p>© GeoB99's Homepage, 2020-2022 | HTML 5 and <a href=https://gohugo.io>Gohugo</a> powered | <a href=https://github.com/GeoB99>GitHub</a></p>
+</footer>
+</body>
+</html>

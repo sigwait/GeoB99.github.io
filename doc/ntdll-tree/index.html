@@ -1,0 +1,131 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="GeoB99">
+<title>NTDLL Tree</title>
+<link rel=stylesheet href=https://sigwait.github.io/GeoB99.github.io/css/style.css>
+<link rel=icon href=https://sigwait.github.io/GeoB99.github.io/images/Homepage-pic.png>
+<link rel=alternate type=application/rss+xml href=https://sigwait.github.io/GeoB99.github.io/index.xml title="GeoB99 Website">
+<meta property="og:title" content="NTDLL Tree">
+<meta property="og:description" content="Native API user-mode layer (NTDLL) layout source tree The Native API, serving the purpose as a system call interface for subsystem environments, provides the Rtl section known as the Run-Time library as well as Loader and SxS (Side-by-Side Assembly) module source codes. The base library service of the Windows subsystem, Kernel32.dll, makes a call into NTDLL which in turn invokes a specific kernel mode service in the NT kernel to accomplish a request.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sigwait.github.io/GeoB99.github.io/doc/ntdll-tree/"><meta property="article:section" content="doc">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="NTDLL Tree">
+<meta name=twitter:description content="Native API user-mode layer (NTDLL) layout source tree The Native API, serving the purpose as a system call interface for subsystem environments, provides the Rtl section known as the Run-Time library as well as Loader and SxS (Side-by-Side Assembly) module source codes. The base library service of the Windows subsystem, Kernel32.dll, makes a call into NTDLL which in turn invokes a specific kernel mode service in the NT kernel to accomplish a request.">
+</head>
+<body>
+<div class=container>
+<img src=https://sigwait.github.io/GeoB99.github.io/images/ROS.png alt="ReactOS Icon" align=left height=100 width=120 hspace=10>
+<h2>ReactOS Tutorials</h2>
+<h1>NTDLL Tree</h2>
+<h4><a href=https://sigwait.github.io/GeoB99.github.io/ros-tutorials/>&lt;&lt; Go Back</a></h4>
+<hr>
+&lt;h2 id="native-api-user-mode-layer-ntdll-layout-source-tree">Native API user-mode layer (NTDLL) layout source tree&lt;/h2>
+&lt;p>The Native API, serving the purpose as a system call interface for subsystem environments, provides the Rtl section known as the Run-Time library as well as Loader and SxS (Side-by-Side Assembly) module source codes. The base library service of the Windows subsystem, &lt;strong>Kernel32.dll&lt;/strong>, makes a call into NTDLL which in turn invokes a specific kernel mode service in the NT kernel to accomplish a request. &lt;strong>User32.dll&lt;/strong> and &lt;strong>Gdi32.dll&lt;/strong> libraries are exceptions as these make calls which are then trapped into kernel mode in Win32k.sys, not NTDLL!&lt;/p>
+&lt;p>With that said, whenever an application makes a function call to &lt;code>IsProcessInJob&lt;/code> in &lt;strong>Kernel32.dll&lt;/strong> library the call flow operation goes through NTDLL and then into the kernel with the path leading to &lt;code>NtIsProcessInJob&lt;/code> call. Windows ensures that whatever service call happening in user mode must be uniform, that is, the proper number of kernel mode services in the NT kernel have to be requested for a specific work.&lt;/p>
+&lt;ul class = "tree">
+&lt;li>d:
+&lt;ul>
+&lt;li>nt
+&lt;ul>
+&lt;li>base (Base Operating System)
+&lt;ul>
+&lt;!-- NTDLL layer -->
+&lt;li>ntdll (Native API layer)
+&lt;ul>
+&lt;li>curdir.c&lt;/li>
+&lt;li>dlluistb.c&lt;/li>
+&lt;li>importtablehash.cpp&lt;/li>
+&lt;li>ldrapi.c&lt;/li>
+&lt;li>ldrinit.c&lt;/li>
+&lt;li>ldrsnap.c&lt;/li>
+&lt;li>ldrutil.c&lt;/li>
+&lt;li>memstm.c&lt;/li>
+&lt;li>query.c&lt;/li>
+&lt;li>resource.c&lt;/li>
+&lt;li>seurtl.c&lt;/li>
+&lt;li>sxsactctx.c&lt;/li>
+&lt;li>sxsctxact.c&lt;/li>
+&lt;li>sxsctxsrch.c&lt;/li>
+&lt;li>sxsisol.cpp&lt;/li>
+&lt;li>sxsquery.c&lt;/li>
+&lt;li>sxsstorage.c&lt;/li>
+&lt;li>sxsstoragemap.c&lt;/li>
+&lt;li>verifier.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- NT kernel -->
+&lt;li>ntos (NT kernel)
+&lt;ul>
+&lt;!-- NT kernel Run-Time library -->
+&lt;li>rtl (NT kernel Run-Time Library)
+&lt;ul>
+&lt;li>avltable.c&lt;/li>
+&lt;li>bitmap.c&lt;/li>
+&lt;li>bootstatus.c&lt;/li>
+&lt;li>cnvint.c&lt;/li>
+&lt;li>environ.c&lt;/li>
+&lt;li>gentable.c&lt;/li>
+&lt;li>heap.c&lt;/li>
+&lt;li>heapdll.c&lt;/li>
+&lt;li>heappage.c&lt;/li>
+&lt;li>ldrrsrc.c&lt;/li>
+&lt;li>lookasid.c&lt;/li>
+&lt;li>lznt1.c&lt;/li>
+&lt;li>nls.c&lt;/li>
+&lt;li>nlsxlat.c&lt;/li>
+&lt;li>rtlexec.c&lt;/li>
+&lt;li>rtlimagentheader.c&lt;/li>
+&lt;li>rtlvalidateunicodestring.c&lt;/li>
+&lt;li>rxact.c&lt;/li>
+&lt;li>sertl.c&lt;/li>
+&lt;li>string.c&lt;/li>
+&lt;li>threads.c&lt;/li>
+&lt;li>timer.c&lt;/li>
+&lt;li>tracedb.c&lt;/li>
+&lt;li>version.c&lt;/li>
+&lt;li>wait.c&lt;/li>
+&lt;li>worker.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Windows Management Instrumentation -->
+&lt;li>wmi (Windows Management Instrumentation)
+&lt;ul>
+&lt;li>inc (Header Files)
+&lt;ul>
+&lt;li>common.h&lt;/li>
+&lt;li>request.h&lt;/li>
+&lt;li>wmiump.h&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>ntdll (Native API layer)
+&lt;ul>
+&lt;li>guidapi.c&lt;/li>
+&lt;li>logapi.c&lt;/li>
+&lt;li>mofapi.c&lt;/li>
+&lt;li>notify.c&lt;/li>
+&lt;li>ntdlltrc.c&lt;/li>
+&lt;li>request.c&lt;/li>
+&lt;li>trcapi.c&lt;/li>
+&lt;li>umlog.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+</div>
+<footer>
+<p>© GeoB99's Homepage, 2020-2022 | HTML 5 and <a href=https://gohugo.io>Gohugo</a> powered | <a href=https://github.com/GeoB99>GitHub</a></p>
+</footer>
+</body>
+</html>

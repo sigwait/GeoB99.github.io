@@ -1,0 +1,113 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="GeoB99">
+<title>Winsrv layout tree</title>
+<link rel=stylesheet href=https://sigwait.github.io/GeoB99.github.io/css/style.css>
+<link rel=icon href=https://sigwait.github.io/GeoB99.github.io/images/Homepage-pic.png>
+<link rel=alternate type=application/rss+xml href=https://sigwait.github.io/GeoB99.github.io/index.xml title="GeoB99 Website">
+<meta property="og:title" content="Winsrv layout tree">
+<meta property="og:description" content="Windows USER + Console server library layout tree Nothing much has to be said about this library. Winsrv.dll is all but a provider for server intercommunication support for console and window manager environment. That is, the server being the kernel mode realm of the Windows subsystem environment (as usual Winsrv.dll relies on Win32k). Speaking of the window manager environment, some fundamental aspects of Winsrv.dll are the hard-error implementation, shutdown/logout notification mechanism and windowing message communication.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sigwait.github.io/GeoB99.github.io/doc/winsrv-tree/"><meta property="article:section" content="doc">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Winsrv layout tree">
+<meta name=twitter:description content="Windows USER + Console server library layout tree Nothing much has to be said about this library. Winsrv.dll is all but a provider for server intercommunication support for console and window manager environment. That is, the server being the kernel mode realm of the Windows subsystem environment (as usual Winsrv.dll relies on Win32k). Speaking of the window manager environment, some fundamental aspects of Winsrv.dll are the hard-error implementation, shutdown/logout notification mechanism and windowing message communication.">
+</head>
+<body>
+<div class=container>
+<img src=https://sigwait.github.io/GeoB99.github.io/images/ROS.png alt="ReactOS Icon" align=left height=100 width=120 hspace=10>
+<h2>ReactOS Tutorials</h2>
+<h1>Winsrv layout tree</h2>
+<h4><a href=https://sigwait.github.io/GeoB99.github.io/ros-tutorials/>&lt;&lt; Go Back</a></h4>
+<hr>
+&lt;h2 id="windows-user--console-server-library-layout-tree">Windows USER + Console server library layout tree&lt;/h2>
+&lt;p>Nothing much has to be said about this library. &lt;strong>Winsrv.dll&lt;/strong> is all but a provider for server intercommunication support for console and window manager environment. That is, the server being the kernel mode realm of the Windows subsystem environment (as usual &lt;strong>Winsrv.dll&lt;/strong> relies on Win32k). Speaking of the window manager environment, some fundamental aspects of &lt;strong>Winsrv.dll&lt;/strong> are the hard-error implementation, shutdown/logout notification mechanism and windowing message communication.&lt;/p>
+&lt;ul class="tree">
+&lt;li>d:
+&lt;ul>
+&lt;li>nt
+&lt;ul>
+&lt;li>windows (Windows Subsystem)
+&lt;ul>
+&lt;li>core (Core Windows Kernel Subsystem)
+&lt;ul>
+&lt;li>ntcon (Native Console)
+&lt;ul>
+&lt;li>server
+&lt;ul>
+&lt;li>_output.h&lt;/li>
+&lt;li>_stream.h&lt;/li>
+&lt;li>bitmap.c&lt;/li>
+&lt;li>clipbrd.c&lt;/li>
+&lt;li>cmdline.c&lt;/li>
+&lt;li>convarea.c&lt;/li>
+&lt;li>cursor.c&lt;/li>
+&lt;li>dbcs.c&lt;/li>
+&lt;li>directio.c&lt;/li>
+&lt;li>find.c&lt;/li>
+&lt;li>foncache.c&lt;/li>
+&lt;li>hard.c&lt;/li>
+&lt;li>input.c&lt;/li>
+&lt;li>link.c&lt;/li>
+&lt;li>menu.c&lt;/li>
+&lt;li>misc.c&lt;/li>
+&lt;li>output.c&lt;/li>
+&lt;li>private.c&lt;/li>
+&lt;li>resize.c&lt;/li>
+&lt;li>share.c&lt;/li>
+&lt;li>srvinit.c&lt;/li>
+&lt;li>srvvdm.c&lt;/li>
+&lt;li>stream.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;pre>&lt;code> &amp;lt;!-- Native USER Window Manager --&amp;gt;
+&amp;lt;li&amp;gt;ntuser (Native USER Window Manager)
+&amp;lt;ul&amp;gt;
+&amp;lt;li&amp;gt;server
+&amp;lt;ul&amp;gt;
+&amp;lt;li&amp;gt;api.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;command.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;debug.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;exitwin.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;harderr.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;icamsg.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;instdev.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;reclient.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;sendmsg.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;server.c&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;!-- Win32k Run-Time Library --&amp;gt;
+&amp;lt;li&amp;gt;rtl (Win32k Run-Time Library)
+&amp;lt;ul&amp;gt;
+&amp;lt;li&amp;gt;heap.c&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;!-- Terminal Spool --&amp;gt;
+&amp;lt;li&amp;gt;termspl (Terminal Spool)
+&amp;lt;ul&amp;gt;
+&amp;lt;li&amp;gt;kmspool.c&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;splkernl.c&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;&lt;/code>&lt;/pre>
+</div>
+<footer>
+<p>© GeoB99's Homepage, 2020-2022 | HTML 5 and <a href=https://gohugo.io>Gohugo</a> powered | <a href=https://github.com/GeoB99>GitHub</a></p>
+</footer>
+</body>
+</html>

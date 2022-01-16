@@ -1,0 +1,312 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="GeoB99">
+<title>Win32K Tree</title>
+<link rel=stylesheet href=https://sigwait.github.io/GeoB99.github.io/css/style.css>
+<link rel=icon href=https://sigwait.github.io/GeoB99.github.io/images/Homepage-pic.png>
+<link rel=alternate type=application/rss+xml href=https://sigwait.github.io/GeoB99.github.io/index.xml title="GeoB99 Website">
+<meta property="og:title" content="Win32K Tree">
+<meta property="og:description" content="Windows Subsystem Kernel layout tree The Windows subsystem environment is divided amongst two chunks that make up the entirety of the said subsystem. The user mode, with client libraries used by applications and components that interact within the user mode space (Kernel32.dll, Gdi32.dll, User32.dll et al) and a large portion being the kernel mode. The latter portion is in itself left undocumented, with no major details or explanation provided about the inner implementation of the kernel mode side.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sigwait.github.io/GeoB99.github.io/doc/win32k-tree/"><meta property="article:section" content="doc">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Win32K Tree">
+<meta name=twitter:description content="Windows Subsystem Kernel layout tree The Windows subsystem environment is divided amongst two chunks that make up the entirety of the said subsystem. The user mode, with client libraries used by applications and components that interact within the user mode space (Kernel32.dll, Gdi32.dll, User32.dll et al) and a large portion being the kernel mode. The latter portion is in itself left undocumented, with no major details or explanation provided about the inner implementation of the kernel mode side.">
+</head>
+<body>
+<div class=container>
+<img src=https://sigwait.github.io/GeoB99.github.io/images/ROS.png alt="ReactOS Icon" align=left height=100 width=120 hspace=10>
+<h2>ReactOS Tutorials</h2>
+<h1>Win32K Tree</h2>
+<h4><a href=https://sigwait.github.io/GeoB99.github.io/ros-tutorials/>&lt;&lt; Go Back</a></h4>
+<hr>
+&lt;h2 id="windows-subsystem-kernel-layout-tree">Windows Subsystem Kernel layout tree&lt;/h2>
+&lt;p>The Windows subsystem environment is divided amongst two chunks that make up the entirety of the said subsystem. The user mode, with client libraries used by applications and components that interact within the user mode space (&lt;strong>Kernel32.dll&lt;/strong>, &lt;strong>Gdi32.dll&lt;/strong>, &lt;strong>User32.dll&lt;/strong> et al) and a large portion being the kernel mode. The latter portion is in itself left undocumented, with no major details or explanation provided about the inner implementation of the kernel mode side. And what I am referring about the kernel mode portion is, without a doubt, &lt;strong>Win32k.sys&lt;/strong>.&lt;/p>
+&lt;p>&lt;strong>Win32k.sys&lt;/strong>, which is merely a kernel mode system driver, is responsible for graphics management &amp;ndash; what do you see on the screen. The kernel driver is separated into two major subset components: &lt;strong>GDI&lt;/strong> (also known as Graphics Device Interface) and USER (known as the window manager of Windows). GDI is implemented internally in a directory named &lt;strong>ntgdi&lt;/strong> (as you&amp;rsquo;d see in the tree layout below) whereas the window manager is named as &lt;strong>ntuser&lt;/strong>. Within GDI source tree you&amp;rsquo;ll see directories called &lt;strong>fontdrv&lt;/strong>, &lt;strong>gre&lt;/strong> and &lt;strong>halftone&lt;/strong>. &lt;strong>Gre&lt;/strong> (or Graphics rendering engine) is what it makes up the most of GDI source code base for implementation of primitive graphics handling, brushes, palette, colour objects and whatnot. When capturing the function calls in the call stack of Win32k with WinDBG, whilst in the course of debugging something, you may get across kernel routines such as &lt;code>GreSetDCOwnerEx&lt;/code> with the prefix Gre* denoting the function belongs to the GDI kernel module.&lt;/p>
+&lt;p>&lt;strong>ntuser&lt;/strong>, or just USER, is the window manager that has the responsibility for the creation and management of USER objects such as windows, menus, cursor and other stuff. In other words, USER is the internal compoment that provides graphical interaction between the system and user. An important remark is worth noting &amp;ndash; whilst GDI is primarily written in C++, USER for its entirety remains written in C. It&amp;rsquo;s not really surprising considering USER is a massive historic source code dating back with the very early versions of Windows (including the 9x editions as well such as Windows 95 and 98). The inception of Win32k started with the development and release of the successive Windows operating system, Windows NT 4.0. With the 4.0 version of Windows NT all the GDI and USER code were moved into a kernel mode system driver for the sake of improving overall performance in terms of handling GDI/USER objects in a timely fashion. Before that, the Windows subsystem core code was in a server/client communication process called CSRSS.&lt;/p>
+&lt;ul class="tree">
+&lt;li>d:
+&lt;ul>
+&lt;li>nt
+&lt;ul>
+&lt;!-- Public -->
+&lt;li>public
+&lt;ul>
+&lt;li>internal
+&lt;ul>
+&lt;li>windows (Windows Subsystem)
+&lt;ul>
+&lt;li>inc (Header files)
+&lt;ul>
+&lt;li>muio.w&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>windows (Windows Subsystem)
+&lt;ul>
+&lt;li>core (Core Windows Kernel Subsystem)
+&lt;ul>
+&lt;!-- Kernel mode -->
+&lt;li>kmode (Kernel Mode)
+&lt;ul>
+&lt;li>w32init.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Native Graphics Device Interface (NTGDI) -->
+&lt;li>ntgdi (Native Graphics Device Interface)
+&lt;ul>
+&lt;!-- Font Driver -->
+&lt;li>fontdrv (Font Driver)
+&lt;ul>
+&lt;li>bmfd
+&lt;ul>
+&lt;li>fon16.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Graphics rendering engine (Gre) -->
+&lt;li>gre (Graphics Rendering Engine)
+&lt;ul>
+&lt;li>aatext.cxx&lt;/li>
+&lt;li>alphablt.cxx&lt;/li>
+&lt;li>alphaimg.cxx&lt;/li>
+&lt;li>bltlnk.cxx&lt;/li>
+&lt;li>brushddi.cxx&lt;/li>
+&lt;li>brushobj.hxx&lt;/li>
+&lt;li>curseng.cxx&lt;/li>
+&lt;li>dcgdi.cxx&lt;/li>
+&lt;li>dcobj.hxx&lt;/li>
+&lt;li>devlock.hxx&lt;/li>
+&lt;li>dibapi.cxx&lt;/li>
+&lt;li>drawstream.cxx&lt;/li>
+&lt;li>drvsup.cxx&lt;/li>
+&lt;li>engline.cxx&lt;/li>
+&lt;li>fastfill.cxx&lt;/li>
+&lt;li>hmgrapi.cxx&lt;/li>
+&lt;li>htblt.cxx&lt;/li>
+&lt;li>ntgdi.c&lt;/li>
+&lt;li>opendc.cxx&lt;/li>
+&lt;li>os.cxx&lt;/li>
+&lt;li>palgdi.cxx&lt;/li>
+&lt;li>patblt.cxx&lt;/li>
+&lt;li>plgblt.cxx&lt;/li>
+&lt;li>rgnobj.cxx&lt;/li>
+&lt;li>solline.cxx&lt;/li>
+&lt;li>strchblt.cxx&lt;/li>
+&lt;li>strdir.cxx&lt;/li>
+&lt;li>surfgdi.cxx&lt;/li>
+&lt;li>surfobj.cxx&lt;/li>
+&lt;li>textddi.cxx&lt;/li>
+&lt;li>tranblt.cxx&lt;/li>
+&lt;li>trimesh.cxx&lt;/li>
+&lt;li>trivblt.cxx&lt;/li>
+&lt;li>umpd.hxx&lt;/li>
+&lt;li>umpddrv.cxx&lt;/li>
+&lt;li>umpdeng.cxx&lt;/li>
+&lt;li>umpdobj.cxx&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Halftone GDI Support -->
+&lt;li>halftone (Halftone Tecnique Support)
+&lt;ul>
+&lt;li>ht
+&lt;ul>
+&lt;li>htalias.c&lt;/li>
+&lt;li>htapi.c&lt;/li>
+&lt;li>htgetbmp.c&lt;/li>
+&lt;li>htmapclr.c&lt;/li>
+&lt;li>htmath.c&lt;/li>
+&lt;li>htmemory.c&lt;/li>
+&lt;li>htpat.c&lt;/li>
+&lt;li>htrender.c&lt;/li>
+&lt;li>htsetbmp.c&lt;/li>
+&lt;li>htstret.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Native USER module (Window manager -- NTUSER) -->
+&lt;li>ntuser (Native USER Window Manager)
+&lt;ul>
+&lt;li>inc (Header files)
+&lt;ul>
+&lt;li>ntcb.h&lt;/li>
+&lt;li>user.h&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- NTUSER Run-Time Library -->
+&lt;li>rtl (NTUSER Run-Time Library)
+&lt;ul>
+&lt;li>chartran.c&lt;/li>
+&lt;li>draw.c&lt;/li>
+&lt;li>drawtext.c&lt;/li>
+&lt;li>menu.c&lt;/li>
+&lt;li>mmrtl.c&lt;/li>
+&lt;li>rect.c&lt;/li>
+&lt;li>winevent.c&lt;/li>
+&lt;li>winmgr.c&lt;/li>
+&lt;li>winprop.c&lt;/li>
+&lt;li>wow.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Kernel Mode USER -->
+&lt;li>kernel (Kernel Mode USER)
+&lt;ul>
+&lt;li>access.c&lt;/li>
+&lt;li>acons.c&lt;/li>
+&lt;li>atom.c&lt;/li>
+&lt;li>calcclrc.c&lt;/li>
+&lt;li>caption.c&lt;/li>
+&lt;li>capture.c&lt;/li>
+&lt;li>caret.c&lt;/li>
+&lt;li>class.c&lt;/li>
+&lt;li>classchg.c&lt;/li>
+&lt;li>cleanup.c&lt;/li>
+&lt;li>clipbrd.c&lt;/li>
+&lt;li>createw.c&lt;/li>
+&lt;li>cursor.c&lt;/li>
+&lt;li>dc.c&lt;/li>
+&lt;li>ddemlsvr.c&lt;/li>
+&lt;li>ddetrack.c&lt;/li>
+&lt;li>debug.c&lt;/li>
+&lt;li>desktop.c&lt;/li>
+&lt;li>dragdrop.c&lt;/li>
+&lt;li>dtbitmap.c&lt;/li>
+&lt;li>dwp.c&lt;/li>
+&lt;li>enumwin.c&lt;/li>
+&lt;li>event.c&lt;/li>
+&lt;li>ex.c&lt;/li>
+&lt;li>exitwin.c&lt;/li>
+&lt;li>fekbd.c&lt;/li>
+&lt;li>focusact.c&lt;/li>
+&lt;li>fullscr.c&lt;/li>
+&lt;li>getset.c&lt;/li>
+&lt;li>ghost.c&lt;/li>
+&lt;li>handtabl.c&lt;/li>
+&lt;li>heap.c&lt;/li>
+&lt;li>help.c&lt;/li>
+&lt;li>hidevice.c&lt;/li>
+&lt;li>hooks.c&lt;/li>
+&lt;li>hotkeys.c&lt;/li>
+&lt;li>hungapp.c&lt;/li>
+&lt;li>imehotky.c&lt;/li>
+&lt;li>inctlpan.c&lt;/li>
+&lt;li>init.c&lt;/li>
+&lt;li>input.c&lt;/li>
+&lt;li>job.c&lt;/li>
+&lt;li>kbdlyout.c&lt;/li>
+&lt;li>keyboard.c&lt;/li>
+&lt;li>libmgmt.c&lt;/li>
+&lt;li>loadbits.c&lt;/li>
+&lt;li>logon.c&lt;/li>
+&lt;li>menu.c&lt;/li>
+&lt;li>menudd.c&lt;/li>
+&lt;li>minmax.c&lt;/li>
+&lt;li>misc.c&lt;/li>
+&lt;li>miscutil.c&lt;/li>
+&lt;li>mnaccel.c&lt;/li>
+&lt;li>mnapi.c&lt;/li>
+&lt;li>mnchange.c&lt;/li>
+&lt;li>mncomput.c&lt;/li>
+&lt;li>mncreate.c&lt;/li>
+&lt;li>mndraw.c&lt;/li>
+&lt;li>mndstry.c&lt;/li>
+&lt;li>mngray.c&lt;/li>
+&lt;li>mnkey.c&lt;/li>
+&lt;li>mnloop.c&lt;/li>
+&lt;li>mnpopup.c&lt;/li>
+&lt;li>mnsel.c&lt;/li>
+&lt;li>mnstate.c&lt;/li>
+&lt;li>mnsys.c&lt;/li>
+&lt;li>movesize.c&lt;/li>
+&lt;li>multimon.c&lt;/li>
+&lt;li>newmouse.c&lt;/li>
+&lt;li>ntimm.c&lt;/li>
+&lt;li>ntinput.c&lt;/li>
+&lt;li>ntstubs.c&lt;/li>
+&lt;li>paint.c&lt;/li>
+&lt;li>palette.c&lt;/li>
+&lt;li>pnp.c&lt;/li>
+&lt;li>pool.c&lt;/li>
+&lt;li>power.c&lt;/li>
+&lt;li>profile.c&lt;/li>
+&lt;li>queue.c&lt;/li>
+&lt;li>random.c&lt;/li>
+&lt;li>rare.c&lt;/li>
+&lt;li>sbctl.c&lt;/li>
+&lt;li>scrollw.c&lt;/li>
+&lt;li>security.c&lt;/li>
+&lt;li>sendmsg.c&lt;/li>
+&lt;li>server.c&lt;/li>
+&lt;li>service.c&lt;/li>
+&lt;li>shadow.c&lt;/li>
+&lt;li>showwin.c&lt;/li>
+&lt;li>snapshot.c&lt;/li>
+&lt;li>spb.c&lt;/li>
+&lt;li>sprite.c&lt;/li>
+&lt;li>srvhook.c&lt;/li>
+&lt;li>ssend.c&lt;/li>
+&lt;li>swp.c&lt;/li>
+&lt;li>syscmd.c&lt;/li>
+&lt;li>sysmet.c&lt;/li>
+&lt;li>taskman.c&lt;/li>
+&lt;li>timers.c&lt;/li>
+&lt;li>tmswitch.c&lt;/li>
+&lt;li>tooltips.c&lt;/li>
+&lt;li>tounicod.c&lt;/li>
+&lt;li>update.c&lt;/li>
+&lt;li>usergdi.c&lt;/li>
+&lt;li>userk.h&lt;/li>
+&lt;li>validate.c&lt;/li>
+&lt;li>visrgn.c&lt;/li>
+&lt;li>winable.c&lt;/li>
+&lt;li>winable2.c&lt;/li>
+&lt;li>winmgr.c&lt;/li>
+&lt;li>winprop.c&lt;/li>
+&lt;li>winsta.c&lt;/li>
+&lt;li>winwhere.c&lt;/li>
+&lt;li>wmicon.c&lt;/li>
+&lt;li>xlate.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Win32k Run-Time Library -->
+&lt;li>rtl (Win32k Run-Time Library)
+&lt;ul>
+&lt;li>debug.c&lt;/li>
+&lt;li>heap.c&lt;/li>
+&lt;li>tag.c&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;!-- Win32k Header Files -->
+&lt;li>w32inc (Win32k Header Files)
+&lt;ul>
+&lt;li>w32p.h&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+</div>
+<footer>
+<p>© GeoB99's Homepage, 2020-2022 | HTML 5 and <a href=https://gohugo.io>Gohugo</a> powered | <a href=https://github.com/GeoB99>GitHub</a></p>
+</footer>
+</body>
+</html>
