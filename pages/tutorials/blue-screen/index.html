@@ -46,10 +46,14 @@
 <p>What do I mean by that, exactly? For instance when the NT kernel, an important component of the Windows subsystem (e.g. Win32k) in the kernel space or kernel mode drivers were given a bogus pointer which points to a certain area of memory that couldn&rsquo;t be accessed for a plethora of reasons, like, if the said pointer has an address that is not currently mapped into the memory or it doesn&rsquo;t even exist in the first place the system has to immediately bring its own state to a sudden crash before making the situation way worse, like, writing corrupt data to the I/O storage.</p>
 <p>Another instance of a fatal system crash is when some conditions have not been met in order for Windows to continue its normal operation. Let&rsquo;s take <a href=https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x3e--multiprocessor-configuration-not-supported>MULTIPROCESSOR_CONFIGURATION_NOT_SUPPORTED</a> bugcheck code for example. This bugcheck occurs when Windows has caught that the hardware&rsquo;s multiple logical processors although none of them are symmetrical, that is, each of those have different types and level. It has no correlation with memory or I/O paging corruption whatsoever as the physical/virtual memory areas weren&rsquo;t even touched at all. The NT kernel is baffled because of such differences and doesn&rsquo;t know how to tackle the aforementioned situation, going through a system crash is the only option.</p>
 <p>All in all, when it concerns the scenario of bugchecks, we all must ponder this thought that the situation is not black & white. A bugcheck can occur for various of reasons under a plethora of instances depending on the conditions which Windows went through for the bugcheck to happen. Here&rsquo;s a screenshot with a few summarised points of why a bugcheck happens.</p>
-<p><img src=/images/blue-screen/bsod-reasons.png alt="Various reasons of crashing"></p>
+<p><p class=md__image>
+<img src=/images/blue-screen/bsod-reasons.png alt="Various reasons of crashing">
+</p></p>
 <h2 id=the-anatomy-of-a-bsod>The anatomy of a BSoD</h2>
 <p>The basic structure of a bugcheck screen is as follows, taking the previous variant of the blue screen (used from Windows 2000 to 7, the latter like 8 and 10 have a different layout).</p>
-<p><img src=/images/blue-screen/bsod.png alt></p>
+<p><p class=md__image>
+<img src=/images/blue-screen/bsod.png alt>
+</p></p>
 <p>In this blue screen, I have numbered the sections as each of those have a specific meaning. Let&rsquo;s get started:</p>
 <ol>
 <li>Intro &ndash; The generic introduction description. Nothing special here.</li>
@@ -106,7 +110,9 @@ KeBugCheck(IN ULONG BugCheckCode)
 </li>
 </ol>
 <p>Here&rsquo;s a screenshot of summarised points of how the bugcheck mechanism works.</p>
-<p><img src=/images/blue-screen/mechanism.png alt></p>
+<p><p class=md__image>
+<img src=/images/blue-screen/mechanism.png alt>
+</p></p>
 <h2 id=is-the-crash-caused-by-a-hardware-malfunction>Is the crash caused by a hardware malfunction?</h2>
 <p>Generally bugchecks tend to happen due to buggy 3rd party kernel mode drivers and accidental occurrences by the NT kernel or critical components which in the latter case they rarely happen. But what if the crash is caused by a hardware malfunction? Definitely and without a doubt bugchecks can happen due to that as well however it&rsquo;s tricky on the first sight to judge if the hardware is at fault.</p>
 <p>The prime factors to take into account are: 1) Does the crash happen frequently? 2) What&rsquo;s the STOP code and the 4 parameters indicating? The frequency of the crash and the information pointed by the STOP code and the additional 4 parameters can give you a small hint of what roughly happened and besides that, the image filename is also important in this context. As I have previously stated above, if the last parameters are 0 then the specific STOP bugcheck code doesn&rsquo;t issue any additional information. Another factor to take into account is how the hardware behaves. Excessive I/O errors such as failures on copying data from the primary storage like from HDD to another storage because of bad sectors is a clear indication Windows will bugcheck sooner or later.</p>
@@ -116,7 +122,9 @@ KeBugCheck(IN ULONG BugCheckCode)
 <p>In Windows 9x editions the Windows subsystem is encapsulated in a VxD driver (a.k.a Virtual Driver) which name is VWIN32.VXD. The function that is responsible for displaying the bugcheck in 9x is _VWIN32_FaultPopup and that is implemented in the same VxD driver. Another variant of the routine that deals with the bugcheck implementation is VWIN32_BlueScreenPopup (presumably the difference between those is that the former is an intrinsic whereas the other is not). The function is called each time an exception within the subsystem occurs.</p>
 <p>In addition, the software interrupts are not disabled nor masked as in the case of what KeBugCheck(Ex) does in the NT kernel. As a matter of fact is that _VWIN32_FaultPopup waits for a keystroke by the user (hence the typical Press any key to continue message in the blue screen). VWIN32.VXD is still loaded in the memory and the user is able to bring Windows back to the graphics shell even though the chance of successfully getting back into the shell and continuing the normal operation is pretty much minimal as the system may become unresponsive.</p>
 <p>With all that being said, this explains why the blue screen in the 9x editions of Windows are less serious than in NT however. In 9x the user may willy nilly be able to continue using the system with some issues, it&rsquo;s a hit and miss condition. But a bugcheck in NT indicates a fatal problem which the system cannot be recovered, what is left for the user to do is to restart the system. Here&rsquo;s a screenshot of a few summarised points in regard of NT/9x bugcheck implementation differences.</p>
-<p><img src=/images/blue-screen/winnt-win9x.png alt></p>
+<p><p class=md__image>
+<img src=/images/blue-screen/winnt-win9x.png alt>
+</p></p>
 <h3 id=references>References</h3>
 <p><a href=https://www.setthings.com/en/blue-screen-of-death/>https://www.setthings.com/en/blue-screen-of-death/</a></p>
 <p><a href=https://faydoc.tripod.com/structures/12/1293.htm>https://faydoc.tripod.com/structures/12/1293.htm</a></p>
